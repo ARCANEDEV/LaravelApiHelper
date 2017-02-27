@@ -46,7 +46,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/LaravelApiHelper.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/LaravelApiHelper.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/LaravelApiHelper.svg?style=flat-square
-[badge_insight]:      https://img.shields.io/sensiolabs/i/[id].svg?style=flat-square
+[badge_insight]:      https://img.shields.io/sensiolabs/i/0f368488-9f53-4085-8ed6-c4629daae1b3.svg?style=flat-square
 [badge_issues]:       https://img.shields.io/github/issues/ARCANEDEV/LaravelApiHelper.svg?style=flat-square
 [badge_package]:      https://img.shields.io/badge/package-arcanedev/laravel--api--helper-blue.svg?style=flat-square
 [badge_release]:      https://img.shields.io/packagist/v/arcanedev/laravel-api-helper.svg?style=flat-square
@@ -59,4 +59,4 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [link-packagist]:     https://packagist.org/packages/arcanedev/laravel-api-helper
 [link-travis]:        https://travis-ci.org/ARCANEDEV/LaravelApiHelper
 [link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/LaravelApiHelper/?branch=master
-[link-insight]:       https://insight.sensiolabs.com/projects/[id]
+[link-insight]:       https://insight.sensiolabs.com/projects/0f368488-9f53-4085-8ed6-c4629daae1b3
