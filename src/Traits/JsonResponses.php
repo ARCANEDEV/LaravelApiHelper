@@ -21,7 +21,7 @@ trait JsonResponses
      */
     public function jsonResponse()
     {
-        return app(JsonResponse::class);
+        return json_response();
     }
 
     /**
