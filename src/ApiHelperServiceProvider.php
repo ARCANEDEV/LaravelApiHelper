@@ -25,13 +25,21 @@ class ApiHelperServiceProvider extends PackageServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+    /**
+     * Register the service provider.
+     */
     public function register()
     {
         parent::register();
 
         $this->registerConfig();
+
+        $this->singleton(Contracts\Http\JsonResponse::class, Http\JsonResponse::class);
     }
 
+    /**
+     * Boot the service provider.
+     */
     public function boot()
     {
         parent::boot();
@@ -41,10 +49,15 @@ class ApiHelperServiceProvider extends PackageServiceProvider
         $this->publishConfig();
     }
 
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
     public function provides()
     {
         return [
-            //
+            Contracts\Http\JsonResponse::class,
         ];
     }
 }

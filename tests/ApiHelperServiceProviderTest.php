@@ -55,7 +55,9 @@ class ApiHelperServiceProviderTest extends TestCase
     /** @test */
     public function it_can_provides()
     {
-        $expected = [];
+        $expected = [
+            \Arcanedev\LaravelApiHelper\Contracts\Http\JsonResponse::class
+        ];
 
         $this->assertSame($expected, $this->provider->provides());
     }

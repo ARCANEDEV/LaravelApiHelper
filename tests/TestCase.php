@@ -38,7 +38,7 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageAliases($app)
     {
         return [
-            //
+            'JsonResponse' => \Arcanedev\LaravelApiHelper\Facades\JsonResponse::class,
         ];
     }
 
