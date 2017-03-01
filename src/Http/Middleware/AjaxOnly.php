@@ -36,20 +36,6 @@ class AjaxOnly
         if ($request->ajax())
             return $next($request);
 
-        return response()->json($this->getResponseContent(), $this->code);
-    }
-
-    /**
-     * Get the error response content.
-     *
-     * @return array
-     */
-    protected function getResponseContent()
-    {
-        return [
-            'status'  => 'error',
-            'code'    => $this->code,
-            'message' => 'Invalid request',
-        ];
+        return json_response()->error('Invalid request', $this->code);
     }
 }
