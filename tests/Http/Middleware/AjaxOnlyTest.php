@@ -17,10 +17,8 @@ class AjaxOnlyTest extends TestCase
     /** @test */
     public function it_can_pass_ajax_request()
     {
-        $server   = ['HTTP_X-Requested-With' => 'XMLHttpRequest'];
-
         /** @var  \Illuminate\Http\JsonResponse  $response */
-        $response = $this->call('GET', '/', [], [], [], $server);
+        $response = $this->ajaxCall('GET', '/');
 
         $this->assertTrue($response->isOk());
 

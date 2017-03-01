@@ -63,14 +63,35 @@ abstract class TestCase extends BaseTestCase
      */
     private function registerRoutes($router)
     {
-        $router->group(['middleware' => 'ajax'], function () use ($router) {
-            $router->get('/', function () {
-                return response()->json([
-                    'status' => 'success',
-                    'code'   => 200,
-                    'data'   => 'Hello world'
-                ], 200);
-            });
-        });
+        $router->namespace('Arcanedev\\LaravelApiHelper\\Tests\\Stubs\\Controllers')
+               ->middleware('ajax')
+               ->name('api::')
+               ->group(function () use ($router) {
+                   $router->get('/', 'ApiController@index')
+                          ->name('index'); // api::index
+
+                   $router->get('{slug}', 'ApiController@show')
+                          ->name('show');  // api::show
+               });
+    }
+
+    /**
+     * Call (AJAX) the given URI and return the Json Response.
+     *
+     * @param  string  $method
+     * @param  string  $uri
+     * @param  array   $parameters
+     * @param  array   $cookies
+     * @param  array   $files
+     * @param  array   $server
+     * @param  string  $content
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     */
+    protected function ajaxCall($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
+    {
+        $server = array_merge(['HTTP_X-Requested-With' => 'XMLHttpRequest'], $server);
+
+        return $this->call($method, $uri, $parameters, $cookies, $files, $server, $content);
     }
 }

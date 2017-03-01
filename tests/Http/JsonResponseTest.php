@@ -70,6 +70,45 @@ class JsonResponseTest extends TestCase
         ], $response->getData(true));
     }
 
+    /** @test */
+    public function it_can_respond_with_success_response_via_trait()
+    {
+        /** @var  \Illuminate\Http\JsonResponse  $response */
+        $response = $this->ajaxCall('GET', '/valid-slug');
+
+        $this->assertJsonResponse($response);
+        $this->assertTrue($response->isOk());
+
+        $expected = [
+            'status' => 'success',
+            'code'   => 200,
+            'data'   => [
+                'title'   => 'Post title',
+                'content' => 'Post content',
+            ],
+        ];
+
+        $this->assertSame($expected, $response->getData(true));
+    }
+
+    /** @test */
+    public function it_can_respond_with_error_response_via_trait()
+    {
+        /** @var  \Illuminate\Http\JsonResponse  $response */
+        $response = $this->ajaxCall('GET', '/invalid-slug');
+
+        $this->assertJsonResponse($response);
+        $this->assertFalse($response->isOk());
+
+        $expected = [
+            'status'  => 'error',
+            'code'    => 404,
+            'message' => 'Post not found with the given slug [invalid-slug]',
+        ];
+
+        $this->assertSame($expected, $response->getData(true));
+    }
+
     /* -----------------------------------------------------------------
      |  Other Methods
      | -----------------------------------------------------------------
