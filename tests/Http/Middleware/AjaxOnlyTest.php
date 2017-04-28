@@ -14,18 +14,19 @@ class AjaxOnlyTest extends TestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_pass_ajax_request()
     {
         /** @var  \Illuminate\Http\JsonResponse  $response */
-        $response = $this->ajaxCall('GET', '/');
+        $response = $this->json('GET', '/')->response;
 
         $this->assertTrue($response->isOk());
 
         $expected = [
-            'status' => 'success',
-            'code'   => 200,
-            'data'   => 'Hello world',
+            'status'  => 200,
+            'code'    => 'success',
+            'message' => 'Hello world',
         ];
 
         $this->assertSame($expected, $response->getData(true));
@@ -40,9 +41,9 @@ class AjaxOnlyTest extends TestCase
         $this->assertFalse($response->isOk());
 
         $expected = [
-            'status'  => 'error',
-            'code'    => 403,
-            'message' => 'Invalid request',
+            'status'  => 403,
+            'code'    => 'error',
+            'message' => 'Invalid AJAX Request',
         ];
 
         $this->assertSame($expected, $response->getData(true));

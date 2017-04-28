@@ -4,17 +4,18 @@ use Arcanedev\LaravelApiHelper\Contracts\Http\JsonResponse as JsonResponseContra
 use Illuminate\Contracts\Routing\ResponseFactory;
 
 /**
- * Class     JsonResponse
+ * Class     JsonResponder
  *
  * @package  Arcanedev\LaravelApiHelper\Http
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class JsonResponse implements JsonResponseContract
+class JsonResponder implements JsonResponseContract
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The response factory.
      *
@@ -26,6 +27,7 @@ class JsonResponse implements JsonResponseContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * JsonResponse constructor.
      *
@@ -40,51 +42,54 @@ class JsonResponse implements JsonResponseContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Respond with a success response.
      *
-     * @param  array|mixed  $data
-     * @param  int          $code
-     * @param  array        $headers
-     * @param  int          $options
+     * @param  array   $data
+     * @param  int     $status
+     * @param  string  $code
+     * @param  array   $headers
+     * @param  int     $options
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function success($data, $code = 200, array $headers = [], $options = 0)
+    public function success(array $data, $status = 200, $code = 'success', array $headers = [], $options = 0)
     {
-        return $this->respond(compact('data'), $code, 'success', $headers, $options);
+        return $this->respond($data, $status, $code, $headers, $options);
     }
 
     /**
      * Respond with an error response.
      *
      * @param  string  $message
-     * @param  int     $code
+     * @param  int     $status
+     * @param  string  $code
      * @param  array   $headers
      * @param  int     $options
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function error($message, $code = 400, array $headers = [], $options = 0)
+    public function error($message, $status = 400, $code = 'error', array $headers = [], $options = 0)
     {
-        return $this->respond(compact('message'), $code, 'error', $headers, $options);
+        return $this->respond(compact('message'), $status, $code, $headers, $options);
     }
 
     /**
      * Respond with a json response.
      *
-     * @param  mixed   $data
-     * @param  int     $code
-     * @param  string  $status
+     * @param  array   $data
+     * @param  int     $status
+     * @param  string  $code
      * @param  array   $headers
      * @param  int     $options
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function respond($data, $code = 200, $status = 'success', array $headers = [], $options = 0)
+    public function respond(array $data, $status = 200, $code, array $headers = [], $options = 0)
     {
-        $data = array_merge(compact('status', 'code'), $data);
-
-        return $this->response->json($data, $code, $headers, $options);
+        return $this->response->json(
+            array_merge(compact('status', 'code'), $data), $status, $headers, $options
+        );
     }
 }

@@ -12,6 +12,7 @@ interface Transformable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Transform the instance.
      *

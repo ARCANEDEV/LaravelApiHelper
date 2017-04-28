@@ -34,7 +34,7 @@ class ApiHelperServiceProvider extends PackageServiceProvider
 
         $this->registerConfig();
 
-        $this->singleton(Contracts\Http\JsonResponse::class, Http\JsonResponse::class);
+        $this->singleton(Contracts\Http\JsonResponse::class, Http\JsonResponder::class);
     }
 
     /**

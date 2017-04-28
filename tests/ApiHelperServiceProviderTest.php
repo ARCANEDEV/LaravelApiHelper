@@ -12,6 +12,7 @@ class ApiHelperServiceProviderTest extends TestCase
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /** @var  \Arcanedev\LaravelApiHelper\ApiHelperServiceProvider */
     protected $provider;
 
@@ -19,6 +20,7 @@ class ApiHelperServiceProviderTest extends TestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -37,6 +39,7 @@ class ApiHelperServiceProviderTest extends TestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {

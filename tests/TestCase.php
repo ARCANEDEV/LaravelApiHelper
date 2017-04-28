@@ -14,6 +14,7 @@ abstract class TestCase extends BaseTestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get package providers.
      *
@@ -49,6 +50,8 @@ abstract class TestCase extends BaseTestCase
      */
     protected function getEnvironmentSetUp($app)
     {
+        $app['config']->set('app.debug', true);
+
         $this->registerRoutes($app['router']);
     }
 
@@ -56,6 +59,7 @@ abstract class TestCase extends BaseTestCase
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the routes for tests
      *
@@ -72,26 +76,9 @@ abstract class TestCase extends BaseTestCase
 
                    $router->get('{slug}', 'ApiController@show')
                           ->name('show');  // api::show
+
+                   $router->post('form-request', 'ApiController@form')
+                          ->name('form-request');  // api::form-request
                });
-    }
-
-    /**
-     * Call (AJAX) the given URI and return the Json Response.
-     *
-     * @param  string  $method
-     * @param  string  $uri
-     * @param  array   $parameters
-     * @param  array   $cookies
-     * @param  array   $files
-     * @param  array   $server
-     * @param  string  $content
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response
-     */
-    protected function ajaxCall($method, $uri, $parameters = [], $cookies = [], $files = [], $server = [], $content = null)
-    {
-        $server = array_merge(['HTTP_X-Requested-With' => 'XMLHttpRequest'], $server);
-
-        return $this->call($method, $uri, $parameters, $cookies, $files, $server, $content);
     }
 }

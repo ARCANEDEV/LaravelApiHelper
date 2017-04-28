@@ -21,6 +21,7 @@ class TransformerTest extends TestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_transform_a_fluent_object()
     {
@@ -156,6 +157,7 @@ class TransformerTest extends TestCase
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     protected function makePost()
     {
         return new Post([

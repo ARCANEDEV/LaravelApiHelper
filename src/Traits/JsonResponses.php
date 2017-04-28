@@ -1,7 +1,5 @@
 <?php namespace Arcanedev\LaravelApiHelper\Traits;
 
-use Arcanedev\LaravelApiHelper\Contracts\Http\JsonResponse;
-
 /**
  * Class     JsonResponses
  *
@@ -14,6 +12,7 @@ trait JsonResponses
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the json response instance.
      *
@@ -27,30 +26,32 @@ trait JsonResponses
     /**
      * Respond with a success response.
      *
-     * @param  array|mixed  $data
-     * @param  int          $code
-     * @param  array        $headers
-     * @param  int          $options
+     * @param  array   $data
+     * @param  int     $status
+     * @param  string  $code
+     * @param  array   $headers
+     * @param  int     $options
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function jsonResponseSuccess($data, $code = 200, array $headers = [], $options = 0)
+    public function jsonResponseSuccess(array $data, $status = 200, $code = 'success', array $headers = [], $options = 0)
     {
-        return $this->jsonResponse()->success($data, $code, $headers, $options);
+        return $this->jsonResponse()->success($data, $status, $code, $headers, $options);
     }
 
     /**
      * Respond with an error response.
      *
      * @param  string  $message
-     * @param  int     $code
+     * @param  int     $status
+     * @param  string  $code
      * @param  array   $headers
      * @param  int     $options
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function jsonResponseError($message, $code = 400, array $headers = [], $options = 0)
+    public function jsonResponseError($message, $status = 400, $code = 'error', array $headers = [], $options = 0)
     {
-        return $this->jsonResponse()->error($message, $code, $headers, $options);
+        return $this->jsonResponse()->error($message, $status, $code, $headers, $options);
     }
 }
