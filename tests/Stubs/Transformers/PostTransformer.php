@@ -12,6 +12,11 @@ use Illuminate\Support\Str;
  */
 class PostTransformer extends Transformer
 {
+    /* -----------------------------------------------------------------
+     |  Main Method
+     | -----------------------------------------------------------------
+     */
+
     /**
      * Transform the instance.
      *

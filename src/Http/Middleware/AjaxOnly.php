@@ -1,17 +1,20 @@
 <?php namespace Arcanedev\LaravelApiHelper\Http\Middleware;
 
+use Arcanedev\Support\Http\Middleware;
+
 /**
  * Class     AjaxOnly
  *
  * @package  Arcanedev\LaravelApiHelper\Http\Middleware
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class AjaxOnly
+class AjaxOnly extends Middleware
 {
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Status code to respond with
      *
@@ -23,6 +26,7 @@ class AjaxOnly
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Handle an incoming request.
      *
@@ -33,9 +37,10 @@ class AjaxOnly
      */
     public function handle($request, \Closure $next)
     {
-        if ($request->ajax())
+        if ($request->expectsJson()) {
             return $next($request);
+        }
 
-        return json_response()->error('Invalid request', $this->code);
+        return json_response()->error('Invalid AJAX Request', $this->code);
     }
 }

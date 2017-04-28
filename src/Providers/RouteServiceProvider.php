@@ -14,6 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Define the routes for the application.
      */

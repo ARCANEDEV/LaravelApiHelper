@@ -11,6 +11,11 @@ use Illuminate\Support\Fluent;
  */
 class FluentTransformer extends Transformer
 {
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+
     /**
      * Transform the item.
      *

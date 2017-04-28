@@ -19,12 +19,14 @@ class Post extends Model implements Transformable
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use TransformableModel;
 
     /* -----------------------------------------------------------------
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * The attributes that are mass assignable.
      *
