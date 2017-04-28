@@ -54,7 +54,7 @@ class JsonResponder implements JsonResponseContract
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function success(array $data, $status = 200, $code = 'success', array $headers = [], $options = 0)
+    public function success(array $data = [], $status = 200, $code = 'success', array $headers = [], $options = 0)
     {
         return $this->respond($data, $status, $code, $headers, $options);
     }
@@ -62,7 +62,7 @@ class JsonResponder implements JsonResponseContract
     /**
      * Respond with an error response.
      *
-     * @param  string  $message
+     * @param  array   $data
      * @param  int     $status
      * @param  string  $code
      * @param  array   $headers
@@ -70,9 +70,9 @@ class JsonResponder implements JsonResponseContract
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function error($message, $status = 400, $code = 'error', array $headers = [], $options = 0)
+    public function error(array $data = [], $status = 400, $code = 'error', array $headers = [], $options = 0)
     {
-        return $this->respond(compact('message'), $status, $code, $headers, $options);
+        return $this->respond($data, $status, $code, $headers, $options);
     }
 
     /**

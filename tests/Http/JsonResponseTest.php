@@ -63,7 +63,7 @@ class JsonResponseTest extends TestCase
     {
         $message  = 'Post with not found';
         $status   = 404;
-        $response = $this->jsonResponse->error($message, $status);
+        $response = $this->jsonResponse->error(compact('message'), $status);
 
         $expected = [
             'status'  => $status,

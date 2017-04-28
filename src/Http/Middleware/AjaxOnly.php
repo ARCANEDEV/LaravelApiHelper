@@ -41,6 +41,8 @@ class AjaxOnly extends Middleware
             return $next($request);
         }
 
-        return json_response()->error('Invalid AJAX Request', $this->code);
+        return json_response()->error([
+            'message' => 'Invalid AJAX Request',
+        ], $this->code);
     }
 }

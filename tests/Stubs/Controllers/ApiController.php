@@ -37,7 +37,9 @@ class ApiController
             ]);
         }
 
-        return $this->jsonResponseError("Post not found with the given slug [$slug]", 404);
+        return $this->jsonResponseError([
+            'message' => "Post not found with the given slug [$slug]",
+        ], 404);
     }
 
     public function form(JsonFormRequest $request)
