@@ -3,30 +3,37 @@
 use Arcanedev\LaravelApiHelper\Transformer;
 
 /**
- * Class     FluentTransformer
+ * Class     UserWithPostsTransformer
  *
  * @package  Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class FluentTransformer extends Transformer
+class UserWithPostsTransformer extends Transformer
 {
     /* -----------------------------------------------------------------
-     |  Main Methods
+     |  Properties
      | -----------------------------------------------------------------
      */
 
     /**
      * Transform the given resource for the API output.
      *
-     * @param  \Illuminate\Support\Fluent  $resource
+     * @param  \Arcanedev\LaravelApiHelper\Tests\Stubs\Models\User  $resource
      *
      * @return array
      */
     public function transformResource($resource)
     {
+        $posts = $resource->posts;
+
+        $this->withMeta([
+            'posts_count' => $posts->count(),
+        ]);
+
         return [
-            'title'   => $resource->get('title'),
-            'content' => $resource->get('content'),
+            'full_name' => $resource->full_name,
+            'email'     => $resource->email,
+            'posts'     => PostTransformer::subResource($posts),
         ];
     }
 }

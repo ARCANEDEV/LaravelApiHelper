@@ -52,6 +52,13 @@ abstract class TestCase extends BaseTestCase
     {
         $app['config']->set('app.debug', true);
 
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('database.connections.testing', [
+            'driver'   => 'sqlite',
+            'database' => ':memory:',
+            'prefix'   => '',
+        ]);
+
         $this->registerRoutes($app['router']);
     }
 
