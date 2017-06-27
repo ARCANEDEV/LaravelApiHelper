@@ -1,7 +1,5 @@
 <?php namespace Arcanedev\LaravelApiHelper\Tests\Stubs\Models;
 
-use Arcanedev\LaravelApiHelper\Contracts\Transformable;
-use Arcanedev\LaravelApiHelper\Traits\TransformableModel;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -13,24 +11,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property  string  title
  * @property  string  content
  */
-class Post extends Model implements Transformable
+class Post extends Model
 {
-    /* -----------------------------------------------------------------
-     |  Traits
-     | -----------------------------------------------------------------
-     */
-
-    use TransformableModel;
-
-    /* -----------------------------------------------------------------
-     |  Properties
-     | -----------------------------------------------------------------
-     */
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = ['title', 'content'];
+    public $table      = 'posts';
+    public $timestamps = false;
+    protected $guarded = ['id'];
 }

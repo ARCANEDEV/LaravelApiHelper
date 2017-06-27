@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers;
 
-use Arcanedev\LaravelApiHelper\Support\Transformer;
+use Arcanedev\LaravelApiHelper\Transformer;
 use Arcanedev\LaravelApiHelper\Tests\Stubs\Models\Post;
 use Illuminate\Support\Str;
 
@@ -20,16 +20,16 @@ class PostTransformer extends Transformer
     /**
      * Transform the instance.
      *
-     * @param  \Arcanedev\LaravelApiHelper\Tests\Stubs\Models\Post  $post
+     * @param  \Arcanedev\LaravelApiHelper\Tests\Stubs\Models\Post  $resource
      *
      * @return array
      */
-    public function transform(Post $post)
+    public function transformResource($resource)
     {
         return [
-            'title'   => $post->title,
-            'slug'    => Str::slug($post->title),
-            'content' => $post->content,
+            'title'   => $resource->title,
+            'slug'    => Str::slug($resource->title),
+            'content' => $resource->content,
         ];
     }
 }

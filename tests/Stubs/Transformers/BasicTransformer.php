@@ -3,30 +3,27 @@
 use Arcanedev\LaravelApiHelper\Transformer;
 
 /**
- * Class     FluentTransformer
+ * Class     BasicTransformer
  *
  * @package  Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class FluentTransformer extends Transformer
+class BasicTransformer extends Transformer
 {
     /* -----------------------------------------------------------------
-     |  Main Methods
+     |  Main Method
      | -----------------------------------------------------------------
      */
 
     /**
      * Transform the given resource for the API output.
      *
-     * @param  \Illuminate\Support\Fluent  $resource
+     * @param  array  $resource
      *
      * @return array
      */
     public function transformResource($resource)
     {
-        return [
-            'title'   => $resource->get('title'),
-            'content' => $resource->get('content'),
-        ];
+        return $resource;
     }
 }
