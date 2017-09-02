@@ -14,6 +14,7 @@ class ApiHelperServiceProvider extends PackageServiceProvider
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Package name.
      *
@@ -25,6 +26,7 @@ class ApiHelperServiceProvider extends PackageServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the service provider.
      */
