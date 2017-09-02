@@ -24,15 +24,19 @@ class FormRequestTest extends TestCase
         $this->assertFalse($response->isOk());
         $this->assertSame(422, $response->status());
 
-        $this->assertJson($response->content());
-        $this->assertSame(json_encode([
-            'code'     => 'validation_failed',
-            'status'   => 422,
-            'messages' => [
-                'name'  => ['The name field is required.'],
-                'email' => ['The email field is required.']
-            ]
-        ]), $response->content());
+        $this->assertJson($content = $response->content());
+
+        $this->assertSame([
+            'message' => 'The given data was invalid.',
+            'errors'  => [
+                'name'  => [
+                    'The name field is required.',
+                ],
+                'email' => [
+                    'The email field is required.',
+                ],
+            ],
+        ], json_decode($content, true));
     }
 
     /** @test */

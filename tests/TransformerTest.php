@@ -6,9 +6,7 @@ use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\BasicTransformer;
 use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\FluentTransformer;
 use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\PostTransformer;
 use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\UserWithPostsTransformer;
-use Arcanedev\LaravelApiHelper\Tests\TestCase;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Fluent;
 
 /**
@@ -221,7 +219,9 @@ class TransformerTest extends TestCase
             'current_page'  => 1,
             'from'          => 1,
             'last_page'     => 2,
+            'first_page_url' => '/?page=1',
             'next_page_url' => '/?page=2',
+            'last_page_url' => '/?page=2',
             'path'          => '/',
             'per_page'      => 5,
             'prev_page_url' => null,
@@ -229,7 +229,7 @@ class TransformerTest extends TestCase
             'total'         => 10,
         ];
 
-        $this->assertSame($expectedMeta, $transformed['meta']);
+        $this->assertEquals($expectedMeta, $transformed['meta']);
     }
 
     /** @test */
@@ -244,7 +244,7 @@ class TransformerTest extends TestCase
 
         $transformer->setExtra('meta', ['type' => 'paginator']);
 
-        $this->assertSame([
+        $this->assertEquals([
             'data' => [
                 [
                     'title'   => 'Post title',
@@ -257,16 +257,18 @@ class TransformerTest extends TestCase
                 ],
             ],
             'meta' => [
-                'current_page'  => 1,
-                'from'          => 1,
-                'last_page'     => 2,
-                'next_page_url' => '/?page=2',
-                'path'          => '/',
-                'per_page'      => 2,
-                'prev_page_url' => null,
-                'to'            => 2,
-                'total'         => 4,
-                'type'          => 'paginator',
+                'current_page'   => 1,
+                'from'           => 1,
+                'last_page'      => 2,
+                'first_page_url' => '/?page=1',
+                'next_page_url'  => '/?page=2',
+                'last_page_url'  => '/?page=2',
+                'path'           => '/',
+                'per_page'       => 2,
+                'prev_page_url'  => null,
+                'to'             => 2,
+                'total'          => 4,
+                'type'           => 'paginator',
             ],
         ], $transformer->transform());
     }
@@ -293,22 +295,5 @@ class TransformerTest extends TestCase
         }
 
         return $posts;
-    }
-
-    protected function createTables()
-    {
-        Schema::create('users', function ($table) {
-            $table->increments('id');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email');
-        });
-
-        Schema::create('posts', function ($table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->string('title');
-            $table->text('content');
-        });
     }
 }
