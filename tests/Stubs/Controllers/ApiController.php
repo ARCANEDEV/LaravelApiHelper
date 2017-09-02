@@ -1,6 +1,6 @@
 <?php namespace Arcanedev\LaravelApiHelper\Tests\Stubs\Controllers;
 
-use Arcanedev\LaravelApiHelper\Http\FormRequest;
+use Arcanedev\Support\Http\FormRequest;
 use Arcanedev\LaravelApiHelper\Traits\JsonResponses;
 
 /**

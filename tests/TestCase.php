@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\LaravelApiHelper\Tests;
 
+use Illuminate\Support\Facades\Schema;
 use Orchestra\Testbench\BrowserKit\TestCase as BaseTestCase;
 
 /**
@@ -87,5 +88,22 @@ abstract class TestCase extends BaseTestCase
                    $router->post('form-request', 'ApiController@form')
                           ->name('form-request');  // api::form-request
                });
+    }
+
+    protected function createTables()
+    {
+        Schema::create('users', function ($table) {
+            $table->increments('id');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+        });
+
+        Schema::create('posts', function ($table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('title');
+            $table->text('content');
+        });
     }
 }

@@ -12,6 +12,8 @@ use Illuminate\Support\Collection;
  *
  * @package  Arcanedev\LaravelApiHelper
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ *
+ * @deprecated Since v2.2, use \Arcanedev\LaravelApiHelper\Http\Resource instead.
  */
 abstract class Transformer implements Arrayable, Jsonable
 {

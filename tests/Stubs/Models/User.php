@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package  Arcanedev\LaravelApiHelper\Tests\Stubs\Models
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  *
+ * @property  int                                       id
  * @property  string                                    full_name
  * @property  string                                    email
  * @property  \Illuminate\Database\Eloquent\Collection  posts
