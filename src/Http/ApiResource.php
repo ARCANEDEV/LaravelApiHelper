@@ -301,7 +301,7 @@ class ApiResource implements ArrayAccess, JsonSerializable, Responsable, UrlRout
      *
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|mixed
      */
     public function toResponse($request)
     {

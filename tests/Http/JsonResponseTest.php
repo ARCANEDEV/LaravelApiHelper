@@ -47,7 +47,7 @@ class JsonResponseTest extends TestCase
     {
         $response = $this->jsonResponse->success(['foo' => 'bar']);
 
-        $this->assertJsonResponse($response);
+        static::assertJsonResponse($response);
 
         $expected = [
             'status' => 200,
@@ -55,7 +55,7 @@ class JsonResponseTest extends TestCase
             'foo'    => 'bar',
         ];
 
-        $this->assertSame($expected, $response->getData(true));
+        static::assertSame($expected, $response->getData(true));
     }
 
     /** @test */
@@ -71,18 +71,18 @@ class JsonResponseTest extends TestCase
             'message' => $message,
         ];
 
-        $this->assertJsonResponse($response);
-        $this->assertSame($expected, $response->getData(true));
+        static::assertJsonResponse($response);
+        static::assertSame($expected, $response->getData(true));
     }
 
     /** @test */
     public function it_can_respond_with_success_response_via_trait()
     {
         /** @var  \Illuminate\Http\JsonResponse  $response */
-        $response = $this->json('GET', '/valid-slug')->response;
+        $response = $this->json('GET', '/valid-slug')->baseResponse;
 
-        $this->assertJsonResponse($response);
-        $this->assertTrue($response->isOk());
+        static::assertJsonResponse($response);
+        static::assertTrue($response->isOk());
 
         $expected = [
             'status'  => 200,
@@ -91,17 +91,17 @@ class JsonResponseTest extends TestCase
             'content' => 'Post content',
         ];
 
-        $this->assertSame($expected, $response->getData(true));
+        static::assertSame($expected, $response->getData(true));
     }
 
     /** @test */
     public function it_can_respond_with_error_response_via_trait()
     {
         /** @var  \Illuminate\Http\JsonResponse  $response */
-        $response = $this->json('GET', '/invalid-slug')->response;
+        $response = $this->json('GET', '/invalid-slug')->baseResponse;
 
-        $this->assertJsonResponse($response);
-        $this->assertFalse($response->isOk());
+        static::assertJsonResponse($response);
+        static::assertFalse($response->isOk());
 
         $expected = [
             'status'  => 404,
@@ -109,7 +109,7 @@ class JsonResponseTest extends TestCase
             'message' => 'Post not found with the given slug [invalid-slug]',
         ];
 
-        $this->assertSame($expected, $response->getData(true));
+        static::assertSame($expected, $response->getData(true));
     }
 
     /* -----------------------------------------------------------------
@@ -122,8 +122,8 @@ class JsonResponseTest extends TestCase
      *
      * @param  \Illuminate\Http\JsonResponse  $response
      */
-    protected function assertJsonResponse($response)
+    public static function assertJsonResponse($response)
     {
-        $this->assertInstanceOf(\Illuminate\Http\JsonResponse::class, $response);
+        static::assertInstanceOf(\Illuminate\Http\JsonResponse::class, $response);
     }
 }

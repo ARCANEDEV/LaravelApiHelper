@@ -32,15 +32,14 @@ class ApiResourceTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $user = new User([
+        $user = User::query()->create([
             'first_name' => 'John',
             'last_name'  => 'DOE',
             'email'      => 'j.doe@example.com',
         ]);
-        $user->save();
 
-        $this->assertJson($content = UserResource::make($user)->response()->content());
-        $this->assertSame([
+        static::assertJson($content = UserResource::make($user)->response()->content());
+        static::assertSame([
             'data' => [
                 'hashed_id' => 'hashed_id_here',
                 'full_name' => 'John DOE',

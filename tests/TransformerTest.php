@@ -39,8 +39,8 @@ class TransformerTest extends TestCase
     {
         $transformer = new BasicTransformer($data = ['foo' => 'bar']);
 
-        $this->assertSame(compact('data'), $transformer->transform());
-        $this->assertSame(compact('data'), $transformer->toArray());
+        static::assertSame(compact('data'), $transformer->transform());
+        static::assertSame(compact('data'), $transformer->toArray());
     }
 
     /** @test */
@@ -50,10 +50,10 @@ class TransformerTest extends TestCase
 
         $response = $transformer->toResponse();
 
-        $this->assertInstanceOf(\Illuminate\Http\JsonResponse::class, $response);
+        static::assertInstanceOf(\Illuminate\Http\JsonResponse::class, $response);
 
-        $this->assertSame(200, $response->status());
-        $this->assertSame(compact('data'), $response->getData(true));
+        static::assertSame(200, $response->status());
+        static::assertSame(compact('data'), $response->getData(true));
     }
 
     /** @test */
@@ -64,7 +64,7 @@ class TransformerTest extends TestCase
         $transformer->setExtra('code', 'error')
                     ->setExtra('status', 500);
 
-        $this->assertSame([
+        static::assertSame([
             'code'   => 'error',
             'data'   => ['foo' => 'bar'],
             'status' => 500,
@@ -75,7 +75,7 @@ class TransformerTest extends TestCase
             'status' => 400
         ]);
 
-        $this->assertSame([
+        static::assertSame([
             'code'   => 'success',
             'data'   => ['foo' => 'bar'],
             'status' => 400,
@@ -87,9 +87,9 @@ class TransformerTest extends TestCase
     {
         $transformer = BasicTransformer::with($data = ['foo' => 'bar']);
 
-        $this->assertInstanceOf(\Illuminate\Contracts\Support\Jsonable::class, $transformer);
+        static::assertInstanceOf(\Illuminate\Contracts\Support\Jsonable::class, $transformer);
 
-        $this->assertJsonStringEqualsJsonString(
+        static::assertJsonStringEqualsJsonString(
             json_encode(compact('data')), $transformer->toJson()
         );
     }
@@ -110,8 +110,8 @@ class TransformerTest extends TestCase
             ],
         ];
 
-        $this->assertSame($expected, $transformer->transform());
-        $this->assertSame($expected, $transformer->toArray());
+        static::assertSame($expected, $transformer->transform());
+        static::assertSame($expected, $transformer->toArray());
     }
 
     /** @test */
@@ -127,8 +127,8 @@ class TransformerTest extends TestCase
             ],
         ];
 
-        $this->assertSame($expected, $transformer->transform());
-        $this->assertSame($expected, $transformer->toArray());
+        static::assertSame($expected, $transformer->transform());
+        static::assertSame($expected, $transformer->toArray());
     }
 
     /** @test */
@@ -165,8 +165,8 @@ class TransformerTest extends TestCase
             ],
         ];
 
-        $this->assertSame($expected, $transformer->transform());
-        $this->assertSame($expected, $transformer->toArray());
+        static::assertSame($expected, $transformer->transform());
+        static::assertSame($expected, $transformer->toArray());
     }
 
     /** @test */
@@ -188,8 +188,8 @@ class TransformerTest extends TestCase
             ],
         ];
 
-        $this->assertSame($expected, $transformer->transform());
-        $this->assertSame($expected, $transformer->toArray());
+        static::assertSame($expected, $transformer->transform());
+        static::assertSame($expected, $transformer->toArray());
     }
 
     /** @test */
@@ -210,9 +210,10 @@ class TransformerTest extends TestCase
         ];
         $data = $transformed['data'];
 
-        $this->assertCount(5, $data);
+        static::assertCount(5, $data);
+
         foreach ($data as $item) {
-            $this->assertSame($expectedItem, $item);
+            static::assertSame($expectedItem, $item);
         }
 
         $expectedMeta = [
@@ -229,7 +230,7 @@ class TransformerTest extends TestCase
             'total'         => 10,
         ];
 
-        $this->assertEquals($expectedMeta, $transformed['meta']);
+        static::assertEquals($expectedMeta, $transformed['meta']);
     }
 
     /** @test */
@@ -244,7 +245,7 @@ class TransformerTest extends TestCase
 
         $transformer->setExtra('meta', ['type' => 'paginator']);
 
-        $this->assertEquals([
+        static::assertEquals([
             'data' => [
                 [
                     'title'   => 'Post title',
@@ -278,22 +279,18 @@ class TransformerTest extends TestCase
      | -----------------------------------------------------------------
      */
 
+    protected function makePosts($count = 3)
+    {
+        return collect()->pad($count, null)->transform(function () {
+            return $this->makePost();
+        });
+    }
+
     protected function makePost()
     {
         return new Post([
             'title'   => 'Post title',
             'content' => 'Post content',
         ]);
-    }
-
-    protected function makePosts($count = 3)
-    {
-        $posts = collect();
-
-        for ($i = 0; $i < $count; $i++) {
-            $posts->push($this->makePost());
-        }
-
-        return $posts;
     }
 }

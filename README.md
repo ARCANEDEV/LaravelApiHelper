@@ -25,7 +25,7 @@ Laravel API Helper is a package that allows you to add features to build api fas
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `5.1 | 5.2 | 5.3 | 5.4 | 5.5` are supported.
+  * Laravel `5.1` to `5.5` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Contribution

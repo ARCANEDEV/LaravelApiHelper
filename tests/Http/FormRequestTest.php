@@ -1,6 +1,5 @@
 <?php namespace Arcanedev\LaravelApiHelper\Tests\Http;
 
-use Arcanedev\LaravelApiHelper\Http\FormRequest;
 use Arcanedev\LaravelApiHelper\Tests\TestCase;
 
 /**
@@ -19,14 +18,13 @@ class FormRequestTest extends TestCase
     /** @test */
     public function it_can_fail_validation_with_form_request()
     {
-        $response = $this->json('POST', 'form-request')->response;
+        $response = $this->json('POST', 'form-request');
 
-        $this->assertFalse($response->isOk());
-        $this->assertSame(422, $response->status());
+        $response->assertStatus(422);
 
-        $this->assertJson($content = $response->content());
+        static::assertJson($content = $response->content());
 
-        $this->assertSame([
+        static::assertSame([
             'message' => 'The given data was invalid.',
             'errors'  => [
                 'name'  => [
@@ -45,16 +43,15 @@ class FormRequestTest extends TestCase
         $response = $this->json('POST', 'form-request', [
             'name'  => 'ARCANEDEV',
             'email' => 'arcanedev@example.com',
-        ])->response;
+        ]);
 
-        $this->assertTrue($response->isOk());
-        $this->assertSame(200, $response->status());
+        $response->assertSuccessful();
 
-        $this->assertJson($response->content());
+        $this->assertJson($content = $response->content());
         $this->assertSame(json_encode([
             'status'  => 200,
             'code'    => 'success',
             'message' => 'Everything is good !',
-        ]), $response->content());
+        ]), $content);
     }
 }
