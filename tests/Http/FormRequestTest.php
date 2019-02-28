@@ -47,8 +47,8 @@ class FormRequestTest extends TestCase
 
         $response->assertSuccessful();
 
-        $this->assertJson($content = $response->content());
-        $this->assertSame(json_encode([
+        static::assertJson($content = $response->content());
+        static::assertSame(json_encode([
             'status'  => 200,
             'code'    => 'success',
             'message' => 'Everything is good !',
