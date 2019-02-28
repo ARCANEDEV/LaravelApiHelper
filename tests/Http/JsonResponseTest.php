@@ -23,14 +23,14 @@ class JsonResponseTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
         $this->jsonResponse = $this->app->make(\Arcanedev\LaravelApiHelper\Contracts\Http\JsonResponse::class);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->jsonResponse);
 
@@ -120,10 +120,10 @@ class JsonResponseTest extends TestCase
     /**
      * Assert that the given response is a json response.
      *
-     * @param  \Illuminate\Http\JsonResponse  $response
+     * @param  \Illuminate\Http\JsonResponse|mixed  $actual
      */
-    public static function assertJsonResponse($response)
+    public static function assertJsonResponse($actual)
     {
-        static::assertInstanceOf(\Illuminate\Http\JsonResponse::class, $response);
+        static::assertInstanceOf(\Illuminate\Http\JsonResponse::class, $actual);
     }
 }

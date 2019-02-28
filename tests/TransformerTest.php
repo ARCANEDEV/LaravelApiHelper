@@ -1,11 +1,13 @@
 <?php namespace Arcanedev\LaravelApiHelper\Tests;
 
-use Arcanedev\LaravelApiHelper\Tests\Stubs\Models\Post;
-use Arcanedev\LaravelApiHelper\Tests\Stubs\Models\User;
-use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\BasicTransformer;
-use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\FluentTransformer;
-use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\PostTransformer;
-use Arcanedev\LaravelApiHelper\Tests\Stubs\Transformers\UserWithPostsTransformer;
+use Arcanedev\LaravelApiHelper\Tests\Stubs\{
+    Models\Post,
+    Models\User,
+    Transformers\BasicTransformer,
+    Transformers\FluentTransformer,
+    Transformers\PostTransformer,
+    Transformers\UserWithPostsTransformer
+};
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Fluent;
 
@@ -22,7 +24,7 @@ class TransformerTest extends TestCase
      | -----------------------------------------------------------------
      */
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
